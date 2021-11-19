@@ -17,3 +17,19 @@ After implementing the chat service into their application, developers can choos
 On the other hand, developers may wish to give **in-game benefits** to valuable members of the community, such as virtual currency or custom username styles.
 
 Chat rooms are hosted on the cloud, meaning that screening, flagging and moderating are **built-in** to the service. You just need to configure your moderation settings and access chats through our simple API.
+
+## Structure
+
+This monorepo is composed of 3 core system components.
+
+### Frontend
+
+The `frontend/` contains a consumer web application which acts as an example chat room. It can be used to send a message, where it will be screened, or to flag an existing message within the chat room.
+
+### Backend
+
+The `backend/` handles the business logic of the consumer app. It stores users, messages and flags within a database, and exposes REST endpoints for sending and flagging messages.
+
+### Data-Science
+
+The `Data-Science/` directory contains the code necessary for training and deploying message screening models. The `backend/` uses these models to check if a message is profane, and the models can re-train on flagged messages within the database.
