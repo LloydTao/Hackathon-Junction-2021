@@ -12,7 +12,6 @@ class Room(models.Model):
         return f"Room: {self.name}"
 
 
-
 class Message(models.Model):
     room = models.ForeignKey(Room, null=False, on_delete=models.CASCADE)
     sender = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
