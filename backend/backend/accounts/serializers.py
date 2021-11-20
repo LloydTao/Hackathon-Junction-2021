@@ -9,3 +9,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "id",
             "username",
         ]
+
+
+class UserLoginResponseSerializer(serializers.Serializer):
+
+    id = serializers.IntegerField()
+    username = serializers.CharField()
+    token = serializers.CharField()
+
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
