@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  title: v1
+  version: '1.0'
+servers:
+  - url: 'http://localhost'
+paths:
+  /rooms:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+      operationId: get-rooms
+    post:
+      summary: ''
+      operationId: post-rooms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+  '/rooms/{room_id}':
+    parameters:
+      - schema:
+          type: string
+        name: room_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+      operationId: get-rooms-room_id
+  '/rooms/{room_id}/messages':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+      operationId: get-rooms-messages
+    parameters:
+      - schema:
+          type: string
+        name: room_id
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-rooms-room_id-messages
+      responses:
+        '200':
+          description: OK
+  /rooms/messages:
+    get:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    post:
+      summary: ''
+      operationId: post-rooms-messages
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessagePost'
+components:
+  schemas:
+    Message:
+      title: Message
+      type: object
+      properties:
+        id:
+          type: integer
+        sender:
+          type: string
+          format: uri
+        content:
+          type: string
+        room:
+          type: string
+          format: uri
+        flagged:
+          type: boolean
+        flags:
+          type: integer
+        likes:
+          type: integer
+    MessagePost:
+      title: MessagePost
+      type: object
+      properties:
+        content:
+          type: string
+    Room:
+      title: Room
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        users:
+          type: string
+          format: uri

@@ -2,25 +2,32 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from messaging.models import Room, Message
-from messaging.serializers import RoomSerializer, MessageSerializer
+from messaging.serializers import RoomSerializer, RoomUsersSerializer, MessageSerializer, MessagePostSerializer
+from accounts.serializers import UserSerializer
+from accounts.models.user import User
 
 
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
+    def get_queryset(self):
+        return Room.objects.all().filter(users=self.request.user)
+
+
     @action(detail=True, methods=["get", "post"])
     def messages(self, request, pk=None):
         room = self.get_object()
         if request.method == "POST":
+            print(request.data)
             serializer = MessagePostSerializer(data=request.data)
             if serializer.is_valid():
-                room.messages.create(
+                print(dict(serializer.validated_data))
+                new_message = room.messages.create(
                     content=serializer.validated_data["content"],
-                    room=room,
                     sender=request.user,
                 )
-                return Response(serializer.data)
+                return Response(MessageSerializer(new_message, context={"request": request}).data)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         print(room.messages)
@@ -29,6 +36,19 @@ class RoomViewSet(viewsets.ModelViewSet):
                 room.messages.all(), many=True, context={"request": request}
             ).data
         )
+
+    @action(detail=True, methods=['get', 'post'])
+    def users(self, request, pk=None):
+        room = self.get_object()
+        if request.method == "POST":
+            serializer = RoomUsersSerializer(data=request.data)
+            if serializer.is_valid():
+                user_list = User.objects.all().filter(id__in=serializer.validated_data['user_ids']).values_list('id', flat=True)
+                new_users = room.users.add(*user_list)
+                return Response(UserSerializer(room.users, many=True, context={"request": request}).data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(UserSerializer(room.users, many=True, context={"request": request}).data)
+
 
 
 class MessageViewSet(viewsets.ModelViewSet):
