@@ -54,3 +54,27 @@ class RoomViewSet(viewsets.ModelViewSet):
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+
+    
+    def get_queryset(self):
+        return Message.objects.all().filter(room__users=self.request.user)
+
+    @action(detail=True, methods=['post'])
+    def flag(self, request, pk=None):
+        message = self.get_object()
+        if message.sender == request.user:
+            return Response({'detail': 'You cannot flag your own messages'}, status=status.HTTP_400_BAD_REQUEST)
+        message.flags += 1
+        message.save()
+        return Response(MessageSerializer(message, context={"request": request}).data)
+
+    @action(detail=True, methods=['post'])
+    def like(self, request, pk=None):
+        message = self.get_object()
+        if message.sender == request.user:
+            return Response({'detail': 'You cannot like your own messages'}, status=status.HTTP_400_BAD_REQUEST)
+        message.likes += 1
+        message.save()
+        return Response(MessageSerializer(message, context={"request": request}).data)
+
+
