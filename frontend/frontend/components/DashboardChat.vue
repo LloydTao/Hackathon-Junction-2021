@@ -2,10 +2,10 @@
   <div>
     <table class="w-full border rounded shadow-md mt-5">
       <thead>
-        <tr class="text-left text-gray-900 bg-gray-100">
-          <th class="px-4 py-3">User</th>
-          <th class="px-4 py-3">Content</th>
-          <th class="px-4 py-3">Actions</th>
+        <tr class="text-left text-gray-900 bg-blue-500">
+          <th class="text-gray-50 px-4 py-3">User</th>
+          <th class="text-gray-50 px-4 py-3">Content</th>
+          <th class="text-gray-50 px-4 py-3">Actions</th>
         </tr>
       </thead>
       <tbody class="bg-white">
