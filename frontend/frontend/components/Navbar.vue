@@ -4,15 +4,9 @@
       <ul class="flex flex-grow space-x-4">
         <li>
           <a href="/" class="flex items-center space-x-3 text-gray-700 md:mr-5">
-            <span
-              class="
-                text-gray-50
-                hover:text-gray-300
-                text-2xl
-                font-semibold
-                py-1
-              "
-              >KeepChat Admin</span
+            <img class="flex w-10 h-10" src="~/assets/Component-1.svg" />
+            <span class="text-gray-50 hover:text-gray-300 text-xl py-1">
+              <span class="font-semibold">KeepChat </span>Admin</span
             >
           </a>
         </li>

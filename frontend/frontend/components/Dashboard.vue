@@ -2,9 +2,10 @@
   <section class="container mx-auto">
     <div class="w-full rounded-lg">
       <div class="w-full overflow-x-auto">
-        <h1 class="text-xl text-gray-900 font-semibold mt-3">Dashboard</h1>
+        <h1 class="text-3xl text-gray-900 font-semibold mt-5">Dashboard</h1>
+        <h1 class="text-xl font-semibold mt-5">Statistics 📊</h1>
         <DashboardCards />
-        <h1 class="text-xl text-gray-900 font-semibold mt-8">Default chat</h1>
+        <h1 class="text-xl font-semibold mt-5">Default chat 💬</h1>
         <DashboardChat />
       </div>
     </div>

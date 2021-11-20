@@ -6,7 +6,7 @@ Almost all young people 15-29-year-olds play games, and majority of them have ex
 
 ## Project
 
-XXX is a game chat service which utilises AI to moderate the chat space. This includes screening messages for hate speech and profanity, measuring and rewarding user sociability, and the ability to learn from new instances of inapproprite messages flagged by the community.
+KeepChat is a game chat service which utilises AI to moderate the chat space. This includes screening messages for hate speech and profanity, measuring and rewarding user sociability, and the ability to learn from new instances of inapproprite messages flagged by the community.
 
 ### Features
 

@@ -5,20 +5,13 @@
         <h1 class="text-xl text-gray-900 font-semibold mt-3">
           {{ user.username }}'s profile
         </h1>
-        <table class="w-full font-mono mt-5">
+        <table class="w-full border rounded shadow-md mt-5">
           <thead>
-            <tr
-              class="
-                font-semibold
-                text-left text-gray-900
-                bg-gray-100
-                uppercase
-              "
-            >
-              <th class="px-4 py-3">User</th>
-              <th class="px-4 py-3">Created</th>
-              <th class="px-4 py-3">Rating</th>
-              <th class="px-4 py-3">Status</th>
+            <tr class="text-left text-gray-900 bg-blue-500">
+              <th class="text-gray-50 px-4 py-3">User</th>
+              <th class="text-gray-50 px-4 py-3">Created</th>
+              <th class="text-gray-50 px-4 py-3">Rating</th>
+              <th class="text-gray-50 px-4 py-3">Status</th>
             </tr>
           </thead>
           <tbody class="bg-white">
