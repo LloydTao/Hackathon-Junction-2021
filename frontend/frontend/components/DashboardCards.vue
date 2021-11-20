@@ -2,7 +2,18 @@
   <div class="flex space-x-4 mt-8 mb-12">
     <div
       id="card"
-      class="flex flex-1 items-center bg-white rounded-lg shadow-lg px-8 py-5"
+      class="
+        flex flex-1
+        items-center
+        bg-white
+        hover:bg-blue-50
+        rounded-lg
+        shadow-lg
+        px-8
+        py-5
+        transition
+        duration-200
+      "
     >
       <div class="flex flex-col text-blue-500">
         <svg
@@ -21,7 +32,17 @@
     </div>
     <div
       id="card"
-      class="flex flex-1 items-center bg-white rounded-lg shadow-lg px-8 py-5"
+      class="
+        flex flex-1
+        items-center
+        bg-white
+        rounded-lg
+        shadow-lg
+        px-8
+        py-5
+        transition
+        duration-200
+      "
     >
       <div class="flex flex-col text-yellow-500">
         <svg
@@ -43,7 +64,17 @@
     </div>
     <div
       id="card"
-      class="flex flex-1 items-center bg-white rounded-lg shadow-lg px-8 py-5"
+      class="
+        flex flex-1
+        items-center
+        bg-white
+        rounded-lg
+        shadow-lg
+        px-8
+        py-5
+        transition
+        duration-200
+      "
     >
       <div class="flex flex-col text-green-500">
         <svg
