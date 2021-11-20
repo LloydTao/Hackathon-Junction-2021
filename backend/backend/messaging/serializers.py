@@ -9,11 +9,14 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
             "id",
             "name",
             "users",
-            "messages",
         ]
 
 
-class MessagePostSerializer(serializers.Serializer):
+class RoomUsersSerializer(serializers.Serializer):
+    user_ids = serializers.ListField(child=serializers.IntegerField())
+
+
+class MessagePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = [
@@ -32,4 +35,5 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
             "flagged",
             "flags",
             "likes",
+            "created",
         ]
