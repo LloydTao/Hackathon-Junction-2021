@@ -101,6 +101,112 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MessagePost'
+  '/rooms/{room_id}/users':
+    parameters:
+      - schema:
+          type: string
+        name: room_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      operationId: get-rooms-room_id-users
+    post:
+      summary: ''
+      operationId: post-rooms-room_id-users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_ids:
+                  type: array
+                  items:
+                    type: integer
+  '/messages/{message_id}':
+    parameters:
+      - schema:
+          type: string
+        name: message_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      operationId: get-messages-message_id
+  '/messages/{message_id}/flag':
+    parameters:
+      - schema:
+          type: string
+        name: message_id
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-messages-message_id-flag
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  '/messages/{message_id}/like':
+    parameters:
+      - schema:
+          type: string
+        name: message_id
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-messages-message_id-like
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
 components:
   schemas:
     Message:
@@ -140,3 +246,11 @@ components:
         users:
           type: string
           format: uri
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
