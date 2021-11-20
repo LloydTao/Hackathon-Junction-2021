@@ -6,17 +6,13 @@ Almost all young people 15-29-year-olds play games, and majority of them have ex
 
 ## Project
 
-KeepChat is a game chat service which utilises AI to moderate the chat space. This includes screening messages for hate speech and profanity, measuring and rewarding user sociability, and the ability to learn from new instances of inapproprite messages flagged by the community.
+KeepChat is an in-game chat service with superpowers, making the chat space friendly for everyone. Our vision is to keep chat safe and inclusive, without requiring constant attention from moderators.
 
-### Features
+Messages sent to a chat room are screened for hate speech, profanity and otherwise malicious messages, before being delivered to other users. Our AI is able to learn what it should filter by looking at messages flagged by users within the chat. This allows it to continuously adapt to harmful language as it evolves, blocking euphemisms, dog whistles. and variations of slurs.
 
-**Screening** is the detection of communications based on known instances of good/bad messages. The AI is able to continuously re-train itself based on what chat users are **flagging** as good or bad messages. Developers can choose whether this data comes from only their own chat rooms, or from the global pool of moderated chat messages.
+KeepChat also measures user sociability by looking at the content of messages, and how other chat users reply or react to their messages. Based on this social score, developers may wish to give in-game benefits to valuable members of the community, such as virtual currency, chat privileges or custom username styles.
 
-After implementing the chat service into their application, developers can choose how their system **moderates** individual messages and users. For example, built-in functionality can automatically censor bad messages by **replacing** or **blocking** profanity and hate speech.
-
-On the other hand, developers may wish to give **in-game benefits** to valuable members of the community, such as virtual currency or custom username styles.
-
-Chat rooms are hosted on the cloud, meaning that screening, flagging and moderating are **built-in** to the service. You just need to configure your moderation settings and access chats through our simple API.
+The power of KeepChat comes from the fact it is completely plug-and-play. Your team doesn’t need to worry about servers, storage, collecting bad messages or re-configuring the filter. Everything is hosted on our cloud. Integrating your application with our chat service is seamless through our simple yet powerful API.
 
 ## Structure
 
