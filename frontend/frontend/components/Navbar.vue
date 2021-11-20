@@ -8,7 +8,7 @@
               class="
                 text-gray-50
                 hover:text-gray-300
-                text-2xl
+                text-xl
                 font-semibold
                 py-1
               "
