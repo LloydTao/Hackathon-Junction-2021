@@ -1,0 +1,57 @@
+<template>
+  <section class="container mx-auto">
+    <div class="w-full rounded-lg">
+      <div class="w-full overflow-x-auto">
+        <h1 class="text-xl text-gray-900 font-semibold mt-3">Room info</h1>
+        <table class="w-full font-mono mt-5">
+          <thead>
+            <tr
+              class="
+                font-semibold
+                text-left text-gray-900
+                bg-gray-100
+                uppercase
+              "
+            >
+              <th class="px-4 py-3">Room</th>
+              <th class="px-4 py-3">Created</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <tr class="text-gray-700">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+                  <div>
+                    <NuxtLink
+                      class="font-semibold text-black hover:underline"
+                      :to="{ name: 'rooms-id', params: { id: room.id } }"
+                    >
+                      <span>
+                        {{ room.name }}
+                      </span>
+                    </NuxtLink>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm">{{ room.created }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      room: {
+        id: 1,
+        name: 'global_chat',
+        created: '2021-11-16',
+      },
+    }
+  },
+}
+</script>
