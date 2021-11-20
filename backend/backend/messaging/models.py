@@ -13,7 +13,9 @@ class Room(models.Model):
 
 
 class Message(models.Model):
-    room = models.ForeignKey(Room, null=False, on_delete=models.CASCADE)
+    room = models.ForeignKey(
+        Room, null=False, on_delete=models.CASCADE, related_name="messages"
+    )
     sender = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     content = models.CharField(max_length=1024)
     created = models.DateTimeField(auto_now=True)
