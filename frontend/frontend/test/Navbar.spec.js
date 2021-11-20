@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import NuxtLogo from '@/components/NuxtLogo.vue'
+import Navbar from '@/components/Navbar.vue'
 
-describe('NuxtLogo', () => {
+describe('Navbar', () => {
   test('is a Vue instance', () => {
-    const wrapper = mount(NuxtLogo)
+    const wrapper = mount(Navbar)
     expect(wrapper.vm).toBeTruthy()
   })
 })
