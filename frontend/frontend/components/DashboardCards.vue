@@ -1,8 +1,19 @@
 <template>
-  <div class="flex space-x-4 mt-8 mb-12">
+  <div
+    class="
+      flex flex-col
+      sm:flex-row
+      space-y-4
+      sm:space-y-0 sm:space-x-4
+      mt-8
+      mb-12
+      max-w-auto
+    "
+  >
     <div
       id="card"
       class="
+        bg-opacity-50
         flex flex-1
         items-center
         bg-white
@@ -33,6 +44,7 @@
     <div
       id="card"
       class="
+        bg-opacity-50
         flex flex-1
         items-center
         bg-white
@@ -42,6 +54,7 @@
         py-5
         transition
         duration-200
+        hover:bg-blue-50
       "
     >
       <div class="flex flex-col text-yellow-500">
@@ -65,6 +78,7 @@
     <div
       id="card"
       class="
+        bg-opacity-50
         flex flex-1
         items-center
         bg-white
@@ -74,6 +88,7 @@
         py-5
         transition
         duration-200
+        hover:bg-blue-50
       "
     >
       <div class="flex flex-col text-green-500">
@@ -94,3 +109,5 @@
     </div>
   </div>
 </template>
+
+<style></style>

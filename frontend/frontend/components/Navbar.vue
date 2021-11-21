@@ -5,7 +5,7 @@
         <li>
           <a href="/" class="flex items-center space-x-3 text-gray-700 md:mr-5">
             <img class="flex w-10 h-10" src="~/assets/Component-1.svg" />
-            <span class="text-gray-50 hover:text-gray-300 text-xl py-1">
+            <span class="text-gray-50 hover:text-black text-xl py-1">
               <span class="font-semibold">KeepChat </span>Admin</span
             >
           </a>
@@ -17,7 +17,7 @@
             to="/"
             class="
               text-gray-50
-              hover:text-gray-400
+              hover:text-black
               text-lg
               font-semibold
               py-1
@@ -31,7 +31,7 @@
             to="/users"
             class="
               text-gray-50
-              hover:text-gray-400
+              hover:text-black
               text-lg
               font-semibold
               py-1
@@ -45,7 +45,7 @@
             to="/rooms"
             class="
               text-gray-50
-              hover:text-gray-400
+              hover:text-black
               text-lg
               font-semibold
               py-1
@@ -183,4 +183,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.bg {
+  background: linear-gradient(180deg, #f3f4f6, #1c4ed8);
+}
+</style>
