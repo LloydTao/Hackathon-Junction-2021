@@ -97,6 +97,9 @@ export default {
       errors: [],
     }
   },
+  created() {
+    this.getMessages()
+  },
   methods: {
     async getMessages() {
       this.error = false
@@ -118,9 +121,6 @@ export default {
           this.error = true
         })
     },
-  },
-  created() {
-    this.getMessages()
   },
 }
 </script>
