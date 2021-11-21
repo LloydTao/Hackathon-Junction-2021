@@ -46,7 +46,20 @@
               <td class="px-4 py-3 text-sm">{{ message.content }}</td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-3">
-                  <div class="text-gray-50 bg-blue-500 h-5 w-5 rounded-full">
+                  <div
+                    class="
+                      text-gray-50
+                      bg-blue-500
+                      hover:bg-blue-400
+                      h-5
+                      w-5
+                      rounded-full
+                      transition
+                      duration-100
+                      cursor-pointer
+                    "
+                    @click="sendFlag(message.id)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="p-1 h-5 w-5"
@@ -58,7 +71,20 @@
                       />
                     </svg>
                   </div>
-                  <div class="text-gray-50 bg-red-500 h-5 w-5 rounded-full">
+                  <div
+                    class="
+                      text-gray-50
+                      bg-red-500
+                      hover:bg-red-400
+                      h-5
+                      w-5
+                      rounded-full
+                      transition
+                      duration-100
+                      cursor-pointer
+                    "
+                    @click="sendLike(message.id)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="p-1 h-5 w-5"
@@ -145,6 +171,40 @@ export default {
         .then(({ data }) => {
           this.messages = data
         })
+        .catch((response) => {
+          this.error = true
+        })
+    },
+    async sendLike(id) {
+      this.error = false
+      const token = (await this.$axios.get('/api/accounts/csrf/')).data.token
+      this.$axios
+        .post(
+          `/api/messages/${id}/like/`,
+          {
+            csrfmiddlewaretoken: token,
+          },
+          {
+            headers: { 'X-CSRFToken': token },
+          }
+        )
+        .catch((response) => {
+          this.error = true
+        })
+    },
+    async sendFlag(id) {
+      this.error = false
+      const token = (await this.$axios.get('/api/accounts/csrf/')).data.token
+      this.$axios
+        .post(
+          `/api/messages/${id}/flag/`,
+          {
+            csrfmiddlewaretoken: token,
+          },
+          {
+            headers: { 'X-CSRFToken': token },
+          }
+        )
         .catch((response) => {
           this.error = true
         })
