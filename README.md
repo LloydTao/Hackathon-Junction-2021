@@ -58,6 +58,6 @@ The `frontend/` contains a consumer web application which acts as an example cha
 
 The `backend/` handles the business logic of the consumer app. It stores users, messages and flags within a database, and exposes REST endpoints for sending and flagging messages.
 
-### Data-Science
+### Data science
 
-The `Data-Science/` directory contains the code necessary for training and deploying message screening models. The `backend/` uses these models to check if a message is profane, and the models can re-train on flagged messages within the database.
+The `data_science/` directory contains the code necessary for training and deploying message screening models. The `backend/` uses these models to check if a message is profane, and the models can re-train on flagged messages within the database.
