@@ -31,16 +31,19 @@ class RoomViewSet(viewsets.ModelViewSet):
             serializer = MessagePostSerializer(data=request.data)
             if serializer.is_valid():
                 # Check content for profanity
-                req = requests.get(f"{JUPYTER_HOST}/predict", params={"string": serializer.validated_data["content"]})
+                req = requests.get(
+                    f"{JUPYTER_HOST}/predict",
+                    params={"string": serializer.validated_data["content"]},
+                )
                 if req.status_code != 200:
                     return Response({}, status=status.HTTP_502_BAD_GATEWAY)
                 # Get response data
                 response = json.loads(req.text)
                 # Create message with safe content
                 new_message = room.messages.create(
-                    content=response['prediction'],
+                    content=response["prediction"],
                     sender=request.user,
-                    flagged=response['offensive'] == "true",
+                    flagged=response["offensive"] == "true",
                 )
                 return Response(
                     MessageSerializer(new_message, context={"request": request}).data
@@ -95,13 +98,13 @@ class MessageViewSet(viewsets.ModelViewSet):
         message.flags += 1
         message.save()
         # Tell ML Model to update
-        req = requests.post(f"{JUPYTER_HOST}/add_data", data={'body': message.content})
+        req = requests.post(f"{JUPYTER_HOST}/add_data", data={"body": message.content})
         print(req.text)
         print(req.status_code)
         if req.status_code != 200:
             return Response(
                 MessageSerializer(message, context={"request": request}).data,
-                status=status.HTTP_502_BAD_GATEWAY
+                status=status.HTTP_502_BAD_GATEWAY,
             )
         return Response(MessageSerializer(message, context={"request": request}).data)
 
