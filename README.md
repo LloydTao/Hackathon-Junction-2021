@@ -8,13 +8,13 @@ KeepChat is an in-game chat service with superpowers, making the chat space frie
 
 At a high level, KeepChat consists of a three-tier architecture.
 
-![KeepChat architecture](assets\keepchat-architecture.png)
+![KeepChat architecture](assets/keepchat-architecture.png)
 
 At the core of the system is the **chat API**, which handles the business logic of the chat rooms. This includes storing messages, processing new messages from users, and processing flags.
 
 When a new message is processed, the chat API asks the **training and screening API** whether the message should be filtered. The AI responds with a `True` or `False`, and the backend will filter the message accordingly before storing it.
 
-![KeepChat admin panel](assets\keepchat-admin-panel.png)
+![KeepChat admin panel](assets/keepchat-admin-panel.png)
 
 When a flag is processed, the chat API tells the AI to add the flagged message to its bank of harmful messages, and then **re-train** on this data. We envision expanding on this by requiring a certain number of flags or total user sociability score in order to add the message to the training data.
 
@@ -32,7 +32,7 @@ We leveraged Git and GitHub in order to distribute code between team members. It
 
 Therefore, any code changes went through a pull request, and we leveraged GitHub Actions in order to run quick code quality checks before accepting a PR.
 
-![KeepChat pull requests](assets\keepchat-pull-requests.png)
+![KeepChat pull requests](assets/keepchat-pull-requests.png)
 
 ## Results
 
@@ -42,7 +42,7 @@ However, they managed to deploy their system to Google Cloud Platform, and provi
 
 Results aside, I would definitely call this weekend a success. We managed to effectively execute on an identical product scope to the challenge winners, which validates our project on both the technical and product level.
 
-![KeepChat team photo](assets\keepchat-team-photo.png)
+![KeepChat team photo](assets/keepchat-team-photo.png)
 
 Go KeepChat!
 
