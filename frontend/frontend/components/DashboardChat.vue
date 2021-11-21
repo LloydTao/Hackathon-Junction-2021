@@ -106,7 +106,7 @@
       </table>
     </div>
 
-    <form class="flex space-x-5 py-3 mt-1">
+    <form class="flex space-x-5 py-3 mt-1" @submit.prevent="processForm">
       <input
         id="message"
         class="
@@ -125,8 +125,9 @@
         "
         type="text"
         placeholder="Type a message..."
+        v-model="message"
       />
-      <button
+      <input
         class="
           bg-blue-500
           hover:bg-blue-700
@@ -138,10 +139,8 @@
           shadow-md
           focus:outline-none focus:shadow-outline
         "
-        type="button"
-      >
-        Send
-      </button>
+        type="submit"
+      />
     </form>
   </div>
 </template>
@@ -150,9 +149,13 @@
 export default {
   data() {
     return {
+      message: '',
       messages: [],
       errors: [],
     }
+  },
+  created() {
+    this.getMessages()
   },
   methods: {
     async getMessages() {
@@ -209,9 +212,29 @@ export default {
           this.error = true
         })
     },
-  },
-  created() {
-    this.getMessages()
+    async sendMessage(message) {
+      this.error = false
+      const token = (await this.$axios.get('/api/accounts/csrf/')).data.token
+      this.$axios
+        .post(
+          `/api/rooms/1/messages/`,
+          {
+            csrfmiddlewaretoken: token,
+            content: message,
+          },
+          {
+            headers: { 'X-CSRFToken': token },
+          }
+        )
+        .then(this.getMessages())
+        .catch((response) => {
+          this.error = true
+        })
+    },
+    processForm() {
+      this.sendMessage(this.message)
+      this.message = ''
+    },
   },
 }
 </script>
