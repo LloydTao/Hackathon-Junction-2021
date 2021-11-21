@@ -17,7 +17,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
 
     def get_queryset(self):
-        return Room.objects.all().filter(users=self.request.user)
+        return Room.objects.all().filter(users=self.request.user.id)
 
     @action(detail=True, methods=["get", "post"])
     def messages(self, request, pk=None):
@@ -71,7 +71,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-        return Message.objects.all().filter(room__users=self.request.user)
+        return Message.objects.all().filter(room__users=self.request.user.id)
 
     @action(detail=True, methods=["post"])
     def flag(self, request, pk=None):
