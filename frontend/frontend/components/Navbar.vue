@@ -4,23 +4,17 @@
       <ul class="flex flex-grow space-x-4">
         <li>
           <a href="/" class="flex items-center space-x-3 text-gray-700 md:mr-5">
-            <span
-              class="
-                text-gray-50
-                hover:text-gray-300
-                text-2xl
-                font-semibold
-                py-1
-              "
-              >KeepChat Admin</span
+            <img class="flex w-10 h-10" src="~/assets/Component-1.svg" />
+            <span class="text-gray-50 hover:text-gray-300 text-xl py-1">
+              <span class="font-semibold">KeepChat </span>Admin</span
             >
           </a>
         </li>
       </ul>
       <ul class="flex items-center space-x-5">
         <li class="hidden sm:flex">
-          <a
-            href="/"
+          <nuxt-link
+            to="/"
             class="
               text-gray-50
               hover:text-gray-400
@@ -29,12 +23,12 @@
               py-1
               px-3
             "
-            >Home</a
+            >Home</nuxt-link
           >
         </li>
         <li class="hidden sm:flex">
-          <a
-            href="/users"
+          <nuxt-link
+            to="/users"
             class="
               text-gray-50
               hover:text-gray-400
@@ -43,12 +37,12 @@
               py-1
               px-3
             "
-            >Users</a
+            >Users</nuxt-link
           >
         </li>
         <li class="hidden sm:flex">
-          <a
-            href="/rooms"
+          <nuxt-link
+            to="/rooms"
             class="
               text-gray-50
               hover:text-gray-400
@@ -57,7 +51,7 @@
               py-1
               px-3
             "
-            >Rooms</a
+            >Rooms</nuxt-link
           >
         </li>
       </ul>
