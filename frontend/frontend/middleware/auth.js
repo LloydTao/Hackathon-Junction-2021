@@ -12,13 +12,7 @@ export default function ({ route, store, redirect }) {
       }
     }
   }
-  if (route.path === '/login') {
-    if (token !== undefined) {
-      // User is logged in, redirect to home
-      return redirect({ path: '/' })
-    }
-  }
-  if (token === undefined) {
+  if (route.path !== '/login' && token === undefined) {
     // User does not exist, send to login
     return redirect({ path: '/login' })
   }

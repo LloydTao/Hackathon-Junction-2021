@@ -185,6 +185,17 @@ export default {
       error: false,
     }
   },
+  created() {
+    if (process.client) {
+      const user = localStorage.getItem('user')
+      if (user) {
+        const token = JSON.parse(user).token
+        if (token) {
+          this.$router.push({ path: '/' })
+        }
+      }
+    }
+  },
   methods: {
     forgot_password() {
       alert('Unlucky!')
