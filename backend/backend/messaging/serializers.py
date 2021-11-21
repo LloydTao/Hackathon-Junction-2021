@@ -5,7 +5,6 @@ from messaging.models import Room, Message
 
 
 class SussySerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = get_user_model()
         fields = ["id", "username"]
@@ -36,6 +35,7 @@ class MessagePostSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
 
     sender = SussySerializer()
+
     class Meta:
         model = Message
         fields = [
