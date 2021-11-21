@@ -1,5 +1,14 @@
+from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
 from messaging.models import Room, Message
+
+
+class SussySerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ["id", "username"]
 
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,6 +34,8 @@ class MessagePostSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
+
+    sender = SussySerializer()
     class Meta:
         model = Message
         fields = [
