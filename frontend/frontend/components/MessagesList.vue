@@ -39,10 +39,10 @@
                       class="font-semibold text-black hover:underline"
                       :to="{
                         name: 'users-id',
-                        params: { id: message.user.id },
+                        params: { id: message.user },
                       }"
                     >
-                      <span> {{ message.user.username }} </span>
+                      <span> {{ message.user }} </span>
                     </NuxtLink>
                   </div>
                 </div>
