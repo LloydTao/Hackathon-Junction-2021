@@ -93,74 +93,34 @@
 export default {
   data() {
     return {
-      messages: [
-        {
-          id: 1,
-          user: {
-            id: 1,
-            username: 'lloydtao',
-            role: 'Player',
-            created: '2021-11-16',
-            rating: 1000,
-            status: 1,
-          },
-          content: 'I feel like I hit a learning roadblock',
-          created: '2021-11-16',
-          flagged: 0,
-          likes: 32,
-          flags: 1,
-        },
-        {
-          id: 2,
-          user: {
-            id: 1,
-            username: 'lloydtao',
-            role: 'Player',
-            created: '2021-11-16',
-            rating: 1000,
-            status: 1,
-          },
-          content: 'Is it possible to use Mongo DB with Django',
-          created: '2021-11-17',
-          flagged: 0,
-          likes: 4,
-          flags: 0,
-        },
-        {
-          id: 3,
-          user: {
-            id: 1,
-            username: 'lloydtao',
-            role: 'Player',
-            created: '2021-11-16',
-            rating: 1000,
-            status: 1,
-          },
-          content:
-            'Would anyone be interested in joining a small community of developers?',
-          created: '2021-11-18',
-          flagged: 0,
-          likes: 25,
-          flags: 3,
-        },
-        {
-          id: 4,
-          user: {
-            id: 1,
-            username: 'lloydtao',
-            role: 'Player',
-            created: '2021-11-16',
-            rating: 1000,
-            status: 1,
-          },
-          content: 'bitch',
-          created: '2021-11-19',
-          flagged: 1,
-          likes: 0,
-          flags: 0,
-        },
-      ],
+      messages: [],
+      errors: [],
     }
+  },
+  methods: {
+    async getMessages() {
+      this.error = false
+      const token = (await this.$axios.get('/api/accounts/csrf/')).data.token
+      this.$axios
+        .get(
+          '/api/rooms/1/messages/',
+          {
+            csrfmiddlewaretoken: token,
+          },
+          {
+            headers: { 'X-CSRFToken': token },
+          }
+        )
+        .then(({ data }) => {
+          this.messages = data
+        })
+        .catch((response) => {
+          this.error = true
+        })
+    },
+  },
+  created() {
+    this.getMessages()
   },
 }
 </script>
