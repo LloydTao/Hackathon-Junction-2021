@@ -10,6 +10,11 @@ from messaging.serializers import (
 )
 from accounts.serializers import UserSerializer
 from accounts.models.user import User
+import requests
+import json
+
+
+JUPYTER_HOST = "http://localhost:8889"
 
 
 class RoomViewSet(viewsets.ModelViewSet):
@@ -17,19 +22,25 @@ class RoomViewSet(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
 
     def get_queryset(self):
-        return Room.objects.all().filter(users=self.request.user)
+        return Room.objects.all().filter(users=self.request.user.id)
 
     @action(detail=True, methods=["get", "post"])
     def messages(self, request, pk=None):
         room = self.get_object()
         if request.method == "POST":
-            print(request.data)
             serializer = MessagePostSerializer(data=request.data)
             if serializer.is_valid():
-                print(dict(serializer.validated_data))
+                # Check content for profanity
+                req = requests.get(f"{JUPYTER_HOST}/predict", params={"string": serializer.validated_data["content"]})
+                if req.status_code != 200:
+                    return Response({}, status=status.HTTP_502_BAD_GATEWAY)
+                # Get response data
+                response = json.loads(req.text)
+                # Create message with safe content
                 new_message = room.messages.create(
-                    content=serializer.validated_data["content"],
+                    content=response['prediction'],
                     sender=request.user,
+                    flagged=response['offensive'] == "true",
                 )
                 return Response(
                     MessageSerializer(new_message, context={"request": request}).data
@@ -71,7 +82,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-        return Message.objects.all().filter(room__users=self.request.user)
+        return Message.objects.all().filter(room__users=self.request.user.id)
 
     @action(detail=True, methods=["post"])
     def flag(self, request, pk=None):
@@ -83,6 +94,15 @@ class MessageViewSet(viewsets.ModelViewSet):
             )
         message.flags += 1
         message.save()
+        # Tell ML Model to update
+        req = requests.post(f"{JUPYTER_HOST}/add_data", data={'body': message.content})
+        print(req.text)
+        print(req.status_code)
+        if req.status_code != 200:
+            return Response(
+                MessageSerializer(message, context={"request": request}).data,
+                status=status.HTTP_502_BAD_GATEWAY
+            )
         return Response(MessageSerializer(message, context={"request": request}).data)
 
     @action(detail=True, methods=["post"])
